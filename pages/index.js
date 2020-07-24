@@ -1,23 +1,33 @@
+import Head from 'next/head'
+
 import Container from '../components/container'
-import MoreStories from '../components/more-stories'
 import HeroPost from '../components/hero-post'
+import HeroSkills from '../components/hero-skills'
 import Intro from '../components/intro'
 import Layout from '../components/layout'
-import { getAllPostsForHome } from '../lib/api'
-import Head from 'next/head'
-import { CMS_NAME } from '../lib/constants'
+import MoreStories from '../components/more-stories'
+import { useAbFlag } from '../contexts/ab-flags'
+import { getHomeData } from '../lib/api'
 
-export default function Index({ allPosts }) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+export default function Index({ allPosts, preview, header }) {
+  const heroPost = allPosts?.[0]
+  const morePosts = allPosts?.slice(1)
+
+  const demoFlag = useAbFlag('demo-flag')
+  console.log('Demo Flag:', demoFlag)
+
   return (
     <>
-      <Layout>
+      <Layout preview={preview}>
         <Head>
-          <title>Next.js Blog Example with {CMS_NAME}</title>
+          <title>Jacob</title>
         </Head>
         <Container>
-          <Intro />
+          <Intro
+            title={header.title}
+            tagline={header.tagline}
+          />
+
           {heroPost && (
             <HeroPost
               title={heroPost.title}
@@ -28,7 +38,12 @@ export default function Index({ allPosts }) {
               excerpt={heroPost.excerpt}
             />
           )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        </Container>
+
+        <HeroSkills className="mb-20" />
+
+        <Container>
+          {morePosts?.length > 0 && <MoreStories posts={morePosts} />}
         </Container>
       </Layout>
     </>
@@ -36,8 +51,12 @@ export default function Index({ allPosts }) {
 }
 
 export async function getStaticProps({ preview }) {
-  const allPosts = await getAllPostsForHome(preview)
+  const { allPosts, header } = await getHomeData(preview)
   return {
-    props: { allPosts },
+    props: {
+      allPosts,
+      header,
+      preview: preview || false,
+    },
   }
 }
