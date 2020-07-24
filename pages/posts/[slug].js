@@ -11,7 +11,6 @@ import Layout from '../../components/layout'
 import { getAllPostsWithSlug, getPostData } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
-import markdownToHtml from '../../lib/markdownToHtml'
 
 export default function Post({ header, post, morePosts, preview }) {
   const router = useRouter()
@@ -60,17 +59,13 @@ export default function Post({ header, post, morePosts, preview }) {
 
 export async function getStaticProps({ params, preview }) {
   const data = await getPostData(params.slug, preview)
-  const content = await markdownToHtml(data?.post?.content || '')
 
   return {
     props: {
       preview: preview || false,
-      header: data?.header || null,
-      post: {
-        ...data?.post,
-        content,
-      },
-      morePosts: data?.morePosts || null,
+      header: data.header,
+      post: data.post,
+      morePosts: data.morePosts || null,
     },
   }
 }

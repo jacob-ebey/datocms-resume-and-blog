@@ -1,4 +1,5 @@
 import { Image } from 'react-datocms'
+import Markdown from './markdown'
 
 export default function SkillCard({ name, details,  image: { responsiveImage } }) {
   return (
@@ -15,12 +16,9 @@ export default function SkillCard({ name, details,  image: { responsiveImage } }
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{name}</div>
         {details && (
-          <div
-            className="text-gray-700 text-base"
-            dangerouslySetInnerHTML={{
-              __html: details,
-            }}
-          />
+          <div className="text-gray-700 text-base">
+            <Markdown markdown={details} />
+          </div>
         )}
       </div>
     </div>

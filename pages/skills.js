@@ -6,7 +6,6 @@ import Layout from '../components/layout'
 import SectionSeparator from '../components/section-separator'
 import SkillList from '../components/skill-list'
 import { getSkillsData } from '../lib/api'
-import markdownToHtml from '../lib/markdownToHtml'
 
 export default function Skills({ preview, header, page }) {
   const { title, tagline, skills } = page
@@ -42,13 +41,7 @@ export async function getStaticProps({ preview }) {
   return {
     props: {
       header,
-      page: {
-        ...skillpage,
-        skills: await Promise.all(skillpage.skills.map(async skill => ({
-          ...skill,
-          details: (skill.details && await markdownToHtml(skill.details)) || null,
-        }))),
-      },
+      page: skillpage,
       preview: preview || false,
     },
   }

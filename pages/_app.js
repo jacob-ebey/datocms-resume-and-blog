@@ -1,4 +1,5 @@
 import 'isomorphic-unfetch'
+import 'highlight.js/styles/nord.css'
 
 import { AbFlagsProvider } from '../contexts/ab-flags'
 import { getAbFlags } from '../lib/api'
