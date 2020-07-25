@@ -7,14 +7,9 @@ import '../styles/index.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <AbFlagsProvider fetchFlags={getAbFlags}>
-        <Component {...pageProps} />
-      </AbFlagsProvider>
-    </>
+    <AbFlagsProvider fetchFlags={getAbFlags}>
+      <Component {...pageProps} />
+    </AbFlagsProvider>
   )
 }
 

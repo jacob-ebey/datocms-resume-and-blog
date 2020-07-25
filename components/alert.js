@@ -2,9 +2,9 @@ import Container from './container'
 import cn from 'classnames'
 
 export default function Alert({ preview, children }) {
-  const toShow = preview || children;
+  const shouldShow = !!(preview || children);
 
-  return !!(preview || children) ? (
+  return shouldShow ? (
     <div
       className={cn('border-b', {
         'bg-accent-7 border-accent-7 text-white': preview,
