@@ -6,15 +6,14 @@ import HeroSkills from '../components/hero-skills'
 import Intro from '../components/intro'
 import Layout from '../components/layout'
 import MoreStories from '../components/more-stories'
-import { useAbFlag } from '../contexts/ab-flags'
+// import { useAbFlag } from '../contexts/ab-flags'
 import { getHomeData } from '../lib/api'
 
 export default function Index({ allPosts, preview, header }) {
   const heroPost = allPosts?.[0]
   const morePosts = allPosts?.slice(1)
 
-  const demoFlag = useAbFlag('demo-flag')
-  console.log('Demo Flag:', demoFlag)
+  // const demoFlag = useAbFlag('demo-flag')
 
   return (
     <>
