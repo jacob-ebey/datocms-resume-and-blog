@@ -33,6 +33,8 @@ export default function Post({ header, post, morePosts, preview }) {
                   {post.title} | Jacob
                 </title>
                 <meta property="og:image" content={post.ogImage.url} />
+
+                <link rel="stylesheet" href="https://unpkg.com/highlight.js@10.1.2/styles/default.css" />
               </Head>
 
               <PostHeader
